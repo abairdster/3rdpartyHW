@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/v5.1.3/css/bootstrap.min.css"
     />
     <link
       rel="stylesheet"
@@ -15,10 +15,11 @@
       crossorigin="anonymous"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@300&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Stick+No+Bills:wght@300&display=swap" rel="stylesheet"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css./app.js" />
+    <link rel="stylesheet" href="style.css" />
+
     <title>Work Day Scheduler</title>
   </head>
 
@@ -28,56 +29,60 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div class="container">
-      <!-- Timeblocks go here -->
-      <div class="time-block row">
-        <div class="hour col col-lg-1">9am</div>
-        <textarea class="bg-secondary description col col-lg-10" id="9am"></textarea>
-        <button class="saveBtn btn col col-lg-1" id="saveBtn1">save</button>
-      </div>
-      <div class="time-block row">
-        <div class="hour col col-lg-1">10am</div>
-        <textarea class="bg-secondary description col col-lg-10" id="10am"></textarea>
-        <button class="saveBtn btn col col-lg-1" id="saveBtn2">save</button>
-      </div>
-      <div class="time-block row">
-        <div class="hour col col-lg-1">11am</div>
-        <textarea class="bg-secondary description col col-lg-10" id="11am"></textarea>
-        <button class="saveBtn btn col col-lg-1" id="saveBtn3">save</button>
-      </div>
-      <div class="time-block row">
-        <div class="hour col col-lg-1">12pm</div>
-        <textarea class="bg-secondary description col col-lg-10" id="12pm"></textarea>
-        <button class="saveBtn btn col col-lg-1" id="saveBtn4">save</button>
-      </div>
-      <div class="time-block row">
-        <div class="hour col col-lg-1">1pm</div>
-        <textarea class="bg-secondary description col col-lg-10" id="1pm"></textarea>
-        <button class="saveBtn btn col col-lg-1" id="saveBtn5">save</button>
-      </div>
-      <div class="time-block row">
-        <div class="hour col col-lg-1">2pm</div>
-        <textarea class="bg-secondary description col col-lg-10" id="2pm"></textarea>
-        <button class="saveBtn btn col col-lg-1" id="saveBtn6">save</button>
-      </div>
-      <div class="time-block row">
-        <div class="hour col col-lg-1">3pm</div>
-        <textarea class="bg-secondary description col col-lg-10" id="3pm"></textarea>
-        <button class="saveBtn btn col col-lg-1" id="saveBtn7">save</button>
-      </div>
-      <div class="time-block row">
-        <div class="hour col col-lg-1">4pm</div>
-        <textarea class="bg-secondary description col col-lg-10" id="4pm"></textarea>
-        <button class="saveBtn btn col col-lg-1" id="saveBtn8">save</button>
-      </div>
-      <div class="time-block row">
-        <div class="hour col col-lg-1">5pm</div>
-        <textarea class="bg-secondary description col col-lg-10" id="5pm"></textarea>
-        <button class="saveBtn btn col col-lg-1" id="saveBtn9">save</button>
-      </div>
-    
-    </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+        <div class="container">
+          <!--Timeblocks go here-->
+          <div class="row">
+            <div class="col-lg-1 hour pt-4">9AM</div>
+            <input id="9Row" class="user-event-input col-md-10 event-input-block">
+            <div class="col-md-1 saveBtn" data-hour=9><i class="fas fa-lock" aria-hidden="true"></i></div>
+         </div>
+         <div class="row">
+            <div class="col-md-1 hour pt-4">10AM</div>
+            <input id="10Row" class="user-event-input col-md-10 event-input-block">
+            <div class="col-md-1 saveBtn" data-hour=10><i class="fas fa-lock" aria-hidden="true"></i></div>
+          </div>
+          <div class="row">
+            <div class="col-md-1 hour pt-4">11AM</div>
+            <input id="11Row" class="user-event-input col-md-10 event-input-block">
+            <div class="col-md-1 saveBtn" data-hour=11><i class="fas fa-lock" aria-hidden="true"></i></div>
+          </div>
+          <div class="row">
+            <div class="col-md-1 hour pt-4">12PM</div>
+            <input id="12Row" class="user-event-input col-md-10 event-input-block">
+            <div class="col-md-1 saveBtn" data-hour=12><i class="fas fa-lock" aria-hidden="true"></i></div>
+          </div>
+          <div class="row">
+            <div class="col-md-1 hour pt-4">1PM</div>
+            <input id="1Row" class="user-event-input col-md-10 event-input-block">
+            <div class="col-md-1 saveBtn" data-hour=1><i class="fas fa-lock" aria-hidden="true"></i></div>
+          </div>
+          <div class="row">
+            <div class="col-md-1 hour pt-4">2PM</div>
+            <input id="2Row" class="user-event-input col-md-10 event-input-block">
+            <div class="col-md-1 saveBtn" data-hour=2><i class="fas fa-lock" aria-hidden="true"></i></div>
+          </div>
+          <div class="row">
+            <div class="col-md-1 hour pt-4">3PM</div>
+            <input id="3Row" class="user-event-input col-md-10 event-input-block">
+            <div class="col-md-1 saveBtn" data-hour=4><i class="fas fa-lock" aria-hidden="true"></i></div>
+          </div>
+          <div class="row">
+            <div class="col-md-1 hour pt-4">4PM</div>
+            <input id="4Row" class="user-event-input col-md-10 event-input-block">
+            <div class="col-md-1 saveBtn" data-hour=5><i class="fas fa-lock" aria-hidden="true"></i></div>
+          </div>
+          <div class="row">
+            <div class="col-md-1 hour pt-4">5pm</div>
+            <input id="5Row" class="user-event-input col-md-10 event-input-block">
+            <div class="col-md-1 saveBtn" data-hour=6><i class="fas fa-lock" aria-hidden="true"></i></div>
+          </div>
+        </div>
+  
+  
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+      <script src="app.js"></script>
   </body>
 </html>

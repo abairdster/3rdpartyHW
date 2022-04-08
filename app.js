@@ -1,102 +1,64 @@
-var currentDayEl = $("#currentDay");
-var now = moment();
-var schedulerTopDate = now.format("dddd, MMMM Do");
-var hour = now.hour();
-var hourNoPeriod;
+var saveBtn = $(".saveBtn");
+var currentHour = moment().format("HH");  
+var currentHourInt = parseInt(currentHour); 
 
-currentDayEl.text(schedulerTopDate);
-var hourBlocks = ["10am", "11am", "12pm", "1pm", "2pm", "3pm","4pm", "5pm"];
-var divContainerEl = $("#container");
-var nineAmTextAreaEl = $("#9am");
-var userEntryArray;
 
-$.each(hourBlocks, function(i, hourBlock) {
-    var divTimeblockEl = $("<div></div>");
+$("#9Row").attr("data-time", moment("9:00 am", "h:mm a").format("HH"));
+$("#10Row").attr("data-time", moment("10:00 am", "hh:mm a").format("HH"));
+$("#11Row").attr("data-time", moment("11:00 am", "hh:mm a").format("HH"));
+$("#12Row").attr("data-time", moment("12:00 pm", "hh:mm a").format("HH"));
+$("#1Row").attr("data-time", moment("1:00 pm", "h:mm a").format("HH"));
+$("#2Row").attr("data-time", moment("2:00 pm", "h:mm a").format("HH"));
+$("#3Row").attr("data-time", moment("3:00 pm", "h:mm a").format("HH"));
+$("#4Row").attr("data-time", moment("4:00 pm", "h:mm a").format("HH"));
+$("#5Row").attr("data-time", moment("5:00 pm", "h:mm a").format("HH"));
 
-    divTimeblockEl.attr("class", "time-block row");
-    var divEl = $("<div></div>");
-    divEl.text(hourBlock);
-    divTimeblockEl.append(divEl);
 
-    var textAreaEl = $("<textarea></textarea>");
-    textAreaElClassBackgroundColor = checkPresentPastFuture(hourBlock);
-    textAreaEl.attr("class", textAreaElClassBackgroundColor);
-    textAreaEl.attr("id", hourBlock);
-    divTimeblockEl.append(textAreaEl);
+$(document).ready(function(){
+   
+   
+    renderPlans();
 
-    var buttonEl = $("<button></button>");
-    var idCounter = i + 2;
-    buttonEl.text("save");
-    buttonEl.attr({
-        class: "saveBtn btn col col-lg-1",
-        id: "saveBtn" + idCounter
-    });
-
-    divTimeblockEl.append(buttonEl);
-
-    divContainerEl.append(divTimeblockEl);
- });
-
-function checkPresentPastFuture(hB) {
-    var present = "bg-danger description col col-lg-10";
-    var past = "bg-secondary description col col-lg-10";
-    var future = "bg-success description col col-lg-10";
-    var tense;
-    var hourPeriodLength = hB.length;
-
-    hourNoPeriod = Number(hB.substring(0, hourPeriodLength - 2));
-    if (hourNoPeriod < 12 && hourNoPeriod !== 9 && hourNoPeriod !== 10 && hourNoPeriod !== 11) {
-    hourNoPeriod = hourNoPeriod + 12;
+     
+     var dateTime = null,
+     date = null;
+     var update = function () {
+    date = moment(new Date())
+    dateTime.html(date.format('dddd, MMMM Do YYYY, h:mm:ss a'));
     };
+    dateTime = $('#currentDay')
+    update();
+    setInterval(update, 1000);
 
-    if (hour === hourNoPeriod) {
-    tense = present;
-    } else if (hour < hourNoPeriod) {
-    tense = future;
-    };
+ 
+  for (var i = 0; i <= 12; i++) {  
 
-    if (hour === 9) {
-    nineAmTextAreaE1.attr("class", present);
-    };
-    if (hour > 9) {
-    nineAmTextAreaEl.attr("class", present);
-    } else if (hour < 9){
-    nineAmTextAreaEl.attr("class", future);
-    };
+    var inputHour = $("#" + i + "Row").attr("data-time"); 
+    var inputHourInt = parseInt(inputHour); 
 
-    return tense;
-}    
-
-function storeEntry(event) {
-    var associatedHour = event.currentTarget.parentNode.children[0].textContent;
-    var description = event.currentTarget.parentNode.children[1].value;
-    userEntryArray.push({date: now, associatedHour: associatedHour, description: description.trim()});
-    localStorage.setItem("userEntryArray", JSON.stringify(userEntryArray));
-}
-
-function renderEntry() {
-    var lastEntryArray = JSON.parse(localStorage.getItem("userEntryArray"));
-    
-    if (lastEntryArray !== null) {
-        for (var i=0; i < lastEntryArray.length; i++) {
-            var elementId = lastEntryArray[i].associatedHour;
-            document.getElementById(elementId).value = lastEntryArray[i].description;
-            console.log("lastEntryArray" + i + ": " + lastEntryArray[i].description);
-        }
-    } else {
-         userEntryArray = [];
+    if (currentHourInt === inputHourInt) {
+        $("#" + i + "Row").addClass("present"); 
     }
-}    
+    if (currentHourInt > inputHourInt) {  
+        $("#" + i + "Row").addClass("past");
+    }
+    if (currentHourInt < inputHourInt) { 
+        $("#" + i + "Row").addClass("future");
+    }
+  }
 
-userEntryArray = []; {
-    var saveBtnClicked = "#saveBtn" + i;
-    var saveBtnEl = "saveBtnEl" + i;
-    var saveBtnEl = $(saveBtnClicked);
+  
+  saveBtn.on("click", function () { 
 
+    var rowHour = $(this).attr("data-hour"); 
+    var input = $("#" + rowHour + "Row").val(); 
+    localStorage.setItem(rowHour, input); 
+  });
 
-    saveBtnEl.on("click", function (event) {
-        event.preventDefault();
-        storeEntry(event);
-    });
-
-}
+  
+  function renderPlans() {
+    for (var i = 0; i <= 12; i++) {
+    $("#" + i + "Row").val(localStorage.getItem(i));
+    }
+  }
+});
